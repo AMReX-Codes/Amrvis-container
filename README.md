@@ -41,7 +41,7 @@ Your current working directory on the host is bind-mounted into `/home/vscode/da
 
 This also runs on Linux using Singularity:
 ```
-wibking@login11:~/Amrvis-container> ./launch_amrvis3d_linux.sh
+username@login11:~/Amrvis-container> ./launch_amrvis3d_linux.sh
 INFO:    Using cached SIF image
 Initializing AMReX (25.05-27-g78268f16d626)...
 AMReX (25.05-27-g78268f16d626) initialized
