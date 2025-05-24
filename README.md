@@ -9,9 +9,6 @@ The complete LaTeX-formatted documentation is available as a [PDF](Amrvis.pdf).
 ## Running on macOS
 
 ### Install XQuartz and allow remote clients
-There is a detailed guide available [here](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088#step-by-step-guide) on how to do this.
-
-[TL;DR](https://en.wikipedia.org/wiki/TL;DR) version:
 1. Install XQuartz
 ```console
 $ brew install --cask xquartz
@@ -39,9 +36,9 @@ Your current working directory on the host is bind-mounted into `/home/vscode/da
 
 ### Optimize mouse settings
 
-Amrvis requires a three-button mouse for usage of some features (see [PDF](Amrvis.pdf) for details).
+Amrvis requires a three-button mouse for some features (see [PDF](Amrvis.pdf) for details).
 
-Three-button mouse emulation can be turned on in XQuartz by toggling the control in `XQuartz -> Setttings... -> Input -> Emulate three button mouse`. Then you can click the emulated middle mouse button by option-left clicking.
+Three-button mouse emulation can be turned on by toggling the control in `XQuartz -> Setttings... -> Input -> Emulate three button mouse`. Then you can click the emulated middle mouse button by holding the option key on your keyboard and left clicking (option + left click).
 
 <img width="596" alt="Screenshot 2025-05-24 at 4 13 45 PM" src="https://github.com/user-attachments/assets/ab1df30f-617b-4286-bcca-4903afe3bd48" />
 
