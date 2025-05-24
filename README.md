@@ -37,6 +37,14 @@ You should see a window that looks like this:
 
 Your current working directory on the host is bind-mounted into `/home/vscode/data`.
 
+### Optimize mouse settings
+
+Amrvis requires a three-button mouse for usage of some features (see [PDF](Amrvis.pdf) for details).
+
+Three-button mouse emulation can be turned on in XQuartz by toggling the control in `XQuartz -> Setttings... -> Input -> Emulate three button mouse`. Then you can click the emulated middle mouse button by option-left clicking.
+
+<img width="596" alt="Screenshot 2025-05-24 at 4 13 45 PM" src="https://github.com/user-attachments/assets/ab1df30f-617b-4286-bcca-4903afe3bd48" />
+
 ## Running on Linux
 
 This also runs on Linux using Singularity:
