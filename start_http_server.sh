@@ -3,7 +3,8 @@
 ## Wrapper script to launch browser-based X11 session
 ## (NOTE: This should only be called from within the Docker container.)
 PORT=8080
-AMRVIS_EXE=/Amrvis3D/amrvis3d.gnu.ex
+EXE=xterm
+#EXE=/Amrvis3D/amrvis3d.gnu.ex
 export XPRA_PASSWORD=$(openssl rand -hex 16)
 
 echo ""
@@ -15,4 +16,4 @@ echo "************************************************************"
 echo ""
 echo ""
 
-xpra start --start=$AMRVIS_EXE --bind-tcp=0.0.0.0:$PORT --no-daemon --ssl-cert=/etc/xpra/ssl-cert.pem
+xpra start --start=$EXE --bind-tcp=0.0.0.0:$PORT --ssl-cert=/etc/xpra/ssl-cert.pem --no-daemon
