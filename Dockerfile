@@ -4,6 +4,17 @@ RUN apt-get --yes -qq update \
  && apt-get --yes -qq upgrade \
  && apt-get --yes -qq install build-essential m4 \
 		      libmotif-dev libxext-dev libxpm-dev \
+		      python3-setuptools \
+ && apt-get --yes -qq clean \
+ && rm -rf /var/lib/apt/lists/*
+
+## add xpra repositories
+RUN git clone https://github.com/Xpra-org/xpra && cd xpra \
+    && ./setup.py install-repo
+
+# install xpra
+RUN apt-get --yes -qq update && apt-get --yes -qq upgrade \
+ && apt-get --yes -qq install xpra xpra-html5 \
  && apt-get --yes -qq clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -28,6 +39,11 @@ COPY .bashrc /home/vscode/.bashrc
 COPY amrvis.defaults /home/vscode/.amrvis.defaults
 COPY Palette /home/vscode/Palette
 
+## configure X11 server
+COPY ./xpra.conf /etc/xpra/xpra.conf
+COPY ./start_http_server.sh /home/vscode/start_http_server.sh
+EXPOSE 8080
+
 WORKDIR /home/vscode
 USER vscode
-CMD [ "/Amrvis3D/amrvis3d.gnu.ex" ]
+CMD [ "./start_http_server.sh" ]
