@@ -41,7 +41,10 @@ COPY Palette /home/vscode/Palette
 
 ## configure X11 server
 COPY ./xpra.conf /etc/xpra/xpra.conf
+COPY ./.Xresources /home/vscode/.Xresources
 COPY ./start_http_server.sh /home/vscode/start_http_server.sh
+RUN mkdir -p /run/user/1000 && chown vscode /run/user/1000
+ENV XDG_RUNTIME_DIR=/run/user/1000
 EXPOSE 8080
 
 WORKDIR /home/vscode

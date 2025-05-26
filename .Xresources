@@ -1,0 +1,103 @@
+!------------------------------------------------------------------------------
+! This is a sample ~/.Xresources file, demonstrating some basic X/Motif and
+! EMWM configuration. Refer to EMWM FAQ/Guide and manpages for further info.
+!------------------------------------------------------------------------------
+
+!------------------------------------------------------------------------------
+! Global X/Motif setup
+!------------------------------------------------------------------------------
+
+!! Make sure to adjust this for your screen to have properly sized fonts
+Xft.dpi:  160
+
+!! Default variable width font for all Motif user interface elements
+*renderTable.variable.fontType: FONT_IS_XFT
+*renderTable.variable.fontName: Liberation Sans
+*renderTable.variable.fontSize: 10
+*renderTable: variable
+
+!! In case fixed width font is preferred for text input widgets...
+*renderTable.fixed.fontType: FONT_IS_XFT
+*renderTable.fixed.fontName: Liberation Mono
+*renderTable.fixed.fontSize: 10
+!! ...uncomment lines below to enable
+! *XmText*renderTable: fixed
+! *XmTextField*renderTable: fixed
+
+!! Default background and highlight colors
+*background: #d2d2d2
+*highlightColor: #5f8ba0
+
+!! Lighter and somewhat saturated background for lists and text input widgets
+*XmList.background: #b6b6aa
+*XmText.background: #d3b5b5
+*XmTextField.background: #d3b5b5
+
+!! Tool tip appearance
+*TipLabel.background: antiquewhite
+*TipShell.borderColor: black
+*TipShell.borderWidth: 1
+
+!! Some tweaks
+*multiClickTime: 260
+*XmScrollBar.width: 14
+*XmScrollBar.height: 14
+
+
+!------------------------------------------------------------------------------
+! Window and icon decorations
+!------------------------------------------------------------------------------
+Emwm*client*background: #8C8C8C
+Emwm*client*activeBackground: #aba68c
+Emwm*icon*activeBackground: #aba68c
+
+!! Dithered frame borders (somewhat reminiscent of Indigo Magic)
+! Emwm*client*topShadowPixmap: 1x1
+! Emwm*client*activeTopShadowPixmap: 1x1
+
+!------------------------------------------------------------------------------
+! Client icon substitution
+!------------------------------------------------------------------------------
+!! Note that unless full path is given, images must reside in one of
+!! default locations like $APPLRESDIR/bitmaps (see XmGetPixmap(3))
+Emwm*XTerm*iconImage: terminal.xpm
+Emwm*NEdit*iconImage: textedit.xpm
+Emwm*XFile*iconImage: xfile.xpm
+
+!------------------------------------------------------------------------------
+! CDE 2.0 Motif look defaults
+!------------------------------------------------------------------------------
+*enableThinThickness: True
+*enableBtn1Transfer: button2_adjust
+*enableButtonTab: True
+*enableDefaultButton: True
+*enableEtchedInMenu: True
+*enableMenuInCascade: True
+*enableMultiKeyBindings: False
+*enableToggleColor: True
+*enableToggleVisual: False
+*enableDragIcon: False
+
+!------------------------------------------------------------------------------
+! CDE 2.0 bindings for text input widgets
+!------------------------------------------------------------------------------
+*XmText*Translations:#override\n\
+	Ctrl<Key>u:delete-to-start-of-line()\n\
+	Ctrl<Key>k:delete-to-end-of-line()\n\
+	Ctrl<Key>a:beginning-of-line()\n\
+	Ctrl<Key>e:end-of-line()\n\
+	Ctrl<Key>p:process-up()\n\
+	Ctrl<Key>b:backward-character()\n\
+	Ctrl<Key>n:process-down()\n\
+	Ctrl<Key>f:forward-character()
+
+*XmTextField*Translations:#override\n\
+	Ctrl<Key>u:delete-to-start-of-line()\n\
+	Ctrl<Key>k:delete-to-end-of-line()\n\
+	Ctrl<Key>a:beginning-of-line()\n\
+	Ctrl<Key>e:end-of-line()\n\
+	Ctrl<Key>b:backward-character()\n\
+	Ctrl<Key>f:forward-character()
+
+!----------------------------------- EOF --------------------------------------
+! $Id: Xresources-sample,v 1.8 2024/12/25 21:30:19 alx Exp alx $
