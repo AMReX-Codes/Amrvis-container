@@ -25,14 +25,14 @@ RUN git clone https://ccse.lbl.gov/pub/Downloads/volpack.git && cd volpack && ma
 RUN git clone https://github.com/AMReX-Codes/amrex.git
 
 ## build Amrvis (2D)
-RUN git clone https://github.com/AMReX-Codes/Amrvis.git Amrvis2D
-COPY GNUmakefile.2d Amrvis2D/GNUmakefile
-RUN cd Amrvis2D && make -j`nproc`
+RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis2D
+COPY GNUmakefile Amrvis2D/GNUmakefile
+RUN cd Amrvis2D && git checkout no-grab-server && make DIM=2 -j`nproc`
 
 ## build Amrvis (3D)
-RUN git clone https://github.com/AMReX-Codes/Amrvis.git Amrvis3D
-COPY GNUmakefile.3d Amrvis3D/GNUmakefile
-RUN cd Amrvis3D && make -j`nproc`
+RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis3D
+COPY GNUmakefile Amrvis3D/GNUmakefile
+RUN cd Amrvis3D && git checkout no-grab-server && make DIM=3 -j`nproc`
 
 ## copy settings
 COPY .bashrc /home/vscode/.bashrc
