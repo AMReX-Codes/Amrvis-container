@@ -34,6 +34,14 @@ RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis3D
 COPY GNUmakefile Amrvis3D/GNUmakefile
 RUN cd Amrvis3D && git checkout no-grab-server && make DIM=3 -j`nproc`
 
+## build window manager
+#RUN apt-get --yes -qq update && apt-get --yes -qq upgrade \
+# && apt-get --yes -qq install libxrandr-dev libxinerama-dev \
+# && apt-get --yes -qq clean \
+# && rm -rf /var/lib/apt/lists/*
+#RUN git clone https://github.com/alx210/emwm.git && cd emwm && make -j`nproc` && make install
+#COPY ./.Xresources /home/vscode/.Xresources
+
 ## copy settings
 COPY .bashrc /home/vscode/.bashrc
 COPY amrvis.defaults /home/vscode/.amrvis.defaults
@@ -41,7 +49,6 @@ COPY Palette /home/vscode/Palette
 
 ## configure X11 server
 COPY ./xpra.conf /etc/xpra/xpra.conf
-COPY ./.Xresources /home/vscode/.Xresources
 COPY ./start_http_server.sh /home/vscode/start_http_server.sh
 RUN mkdir -p /run/user/1000 && chown vscode /run/user/1000
 ENV XDG_RUNTIME_DIR=/run/user/1000
