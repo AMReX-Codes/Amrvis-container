@@ -27,12 +27,12 @@ RUN git clone https://github.com/AMReX-Codes/amrex.git
 ## build Amrvis (2D)
 RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis2D
 COPY GNUmakefile Amrvis2D/GNUmakefile
-RUN cd Amrvis2D && git checkout no-grab-server && make DIM=2 -j`nproc`
+RUN cd Amrvis2D && git checkout logspace-colorbar && make DIM=2 -j`nproc`
 
 ## build Amrvis (3D)
 RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis3D
 COPY GNUmakefile Amrvis3D/GNUmakefile
-RUN cd Amrvis3D && git checkout no-grab-server && make DIM=3 -j`nproc`
+RUN cd Amrvis3D && git checkout logspace-colorbar && make DIM=3 -j`nproc`
 
 ## build window manager
 #RUN apt-get --yes -qq update && apt-get --yes -qq upgrade \
