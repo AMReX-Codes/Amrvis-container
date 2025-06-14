@@ -8,7 +8,7 @@ AMRVIS_EXE=/Amrvis2D/amrvis2d.gnu.ex
 
 open -a XQuartz
 xhost +localhost
-docker run --platform linux/amd64 -v $MOUNT_DIR:/home/vscode/data -e DISPLAY=docker.for.mac.host.internal:$PORT ghcr.io/benwibking/amrvis-container:main $AMRVIS_EXE
+docker run --platform linux/amd64 -v $MOUNT_DIR:/home/vscode/data -e DISPLAY=docker.for.mac.host.internal:$PORT ghcr.io/amrex-codes/amrvis-container:main $AMRVIS_EXE
 
 # If you get an error message like this:
 #     Error: Can't open display: docker.for.mac.host.internal:0
