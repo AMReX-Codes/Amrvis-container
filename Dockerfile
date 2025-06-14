@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04
 RUN apt-get --yes -qq update \
  && apt-get --yes -qq upgrade \
  && apt-get --yes -qq install build-essential gfortran m4 bison flex \
-		      libmotif-dev libxext-dev libxpm-dev \
+		      libmotif-dev libxext-dev libxpm-dev libxinerama-dev libjpeg-dev \
 		      python3-setuptools \
  && apt-get --yes -qq clean \
  && rm -rf /var/lib/apt/lists/*
@@ -39,13 +39,18 @@ RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis3D && cd Amrvis3D &
 COPY GNUmakefile Amrvis3D/GNUmakefile
 RUN cd Amrvis3D && make DIM=3 -j`nproc`
 
-## build window manager
-#RUN apt-get --yes -qq update && apt-get --yes -qq upgrade \
-# && apt-get --yes -qq install libxrandr-dev libxinerama-dev \
-# && apt-get --yes -qq clean \
-# && rm -rf /var/lib/apt/lists/*
-#RUN git clone https://github.com/alx210/emwm.git && cd emwm && make -j`nproc` && make install
-#COPY ./.Xresources /home/vscode/.Xresources
+## build X11 file viewer
+RUN wget https://fastestcode.org/dl/xfile-src-1.0-beta.tar.xz && tar xvf xfile-src-1.0-beta.tar.xz
+RUN cd xfile-beta && make Linux && make install
+
+## build X11 image viewer
+RUN apt-get --yes -qq update \
+ && apt-get --yes -qq upgrade \
+ && apt-get --yes -qq install libjpeg-dev libtiff-dev x11-apps xpdf nedit \
+ && apt-get --yes -qq clean \
+ && rm -rf /var/lib/apt/lists/*
+RUN wget https://fastestcode.org/dl/ximaging-src-1.8.tar.xz && tar xvf ximaging-src-1.8.tar.xz
+RUN cd ximaging-src-1.8 && make Linux && make install
 
 ## copy settings
 COPY .bashrc /home/vscode/.bashrc
