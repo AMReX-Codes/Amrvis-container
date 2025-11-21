@@ -41,7 +41,7 @@ RUN cd Amrvis3D && make DIM=3 -j`nproc`
 
 ## build X11 file viewer
 RUN wget https://fastestcode.org/dl/xfile-src-1.0-beta.tar.xz && tar xvf xfile-src-1.0-beta.tar.xz
-RUN cd xfile-beta && make Linux && make install
+RUN cd xfile-1.0-rc2 && make Linux && make install
 
 ## build X11 image viewer
 RUN apt-get --yes -qq update \
@@ -59,7 +59,7 @@ COPY Palette /home/vscode/Palette
 
 ## configure X11 server
 COPY ./xpra.conf /etc/xpra/xpra.conf
-COPY ./start_http_server.sh /home/vscode/start_http_server.sh
+COPY ./util/start_http_server.sh /home/vscode/start_http_server.sh
 RUN mkdir -p /run/user/1000 && chown vscode /run/user/1000
 ENV XDG_RUNTIME_DIR=/run/user/1000
 EXPOSE 8080
