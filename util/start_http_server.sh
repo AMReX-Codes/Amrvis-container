@@ -16,9 +16,9 @@ echo ""
 echo ""
 
 # use xpra as window manager
-xpra start --start-child=$EXE --bind-tcp=0.0.0.0:$PORT --ssl-cert=/etc/xpra/ssl-cert.pem --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
+xpra start --start-child=$EXE --bind-tcp=0.0.0.0:$PORT --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
 # use emwm as window manager (buggy)
-#xpra desktop --start-child=emwm --bind-tcp=0.0.0.0:$PORT --ssl-cert=/etc/xpra/ssl-cert.pem --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
+#xpra desktop --start-child=emwm --bind-tcp=0.0.0.0:$PORT --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
 
 wait $!
 
