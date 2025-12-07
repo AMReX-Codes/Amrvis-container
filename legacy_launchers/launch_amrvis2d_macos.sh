@@ -2,13 +2,14 @@
 
 ## Wrapper script to launch amrvis2d inside a Docker container on macOS
 
-PORT=1
+PORT=0
 MOUNT_DIR=${1:-`pwd`}
 AMRVIS_EXE=/Amrvis2D/amrvis2d.gnu.ex
+CONTAINER=ghcr.io/amrex-codes/amrvis-container:main
 
 open -a XQuartz
 xhost +localhost
-docker run --platform linux/amd64 -v $MOUNT_DIR:/home/vscode/data -e DISPLAY=docker.for.mac.host.internal:$PORT ghcr.io/amrex-codes/amrvis-container:main $AMRVIS_EXE
+docker run --platform linux/amd64 -v $MOUNT_DIR:/home/vscode/data -e DISPLAY=docker.for.mac.host.internal:$PORT $CONTAINER $AMRVIS_EXE
 
 # If you get an error message like this:
 #     Error: Can't open display: docker.for.mac.host.internal:0
