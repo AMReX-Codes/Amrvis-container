@@ -56,7 +56,7 @@ RUN apt-get --yes -qq update \
  && rm -rf /var/lib/apt/lists/*
 
 ## install xpra HTML5 client from source with pinned version
-RUN git clone https://github.com/Xpra-org/xpra-html5 && cd xpra-html5 && git checkout v19 && ./setup.py install
+RUN git clone https://github.com/BenWibking/xpra-html5 && cd xpra-html5 && git checkout middle-mouse-emu && ./setup.py install
 
 ## copy settings
 COPY .bashrc /home/vscode/.bashrc
