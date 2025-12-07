@@ -1,0 +1,10 @@
+# Xpra HTML5 default settings
+#
+# Keep the defaults consistent with upstream but ensure middle-click
+# emulation is enabled by default.
+
+min-quality = 10
+min-speed = 50
+
+# Enable shift + left click to emulate a middle button click.
+middle_emulation_modifier = shift
