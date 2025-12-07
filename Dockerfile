@@ -62,6 +62,7 @@ RUN git clone https://github.com/BenWibking/xpra-html5 && cd xpra-html5 && git c
 COPY .bashrc /home/vscode/.bashrc
 COPY amrvis.defaults /home/vscode/.amrvis.defaults
 COPY Palette /home/vscode/Palette
+COPY Amrvis.pdf /home/vscode/Amrvis.pdf
 
 ## configure X11 server
 COPY ./xpra.conf /etc/xpra/xpra.conf
@@ -69,6 +70,12 @@ COPY ./util/start_http_server.sh /home/vscode/start_http_server.sh
 RUN mkdir -p /run/user/1000 && chown vscode /run/user/1000
 ENV XDG_RUNTIME_DIR=/run/user/1000
 EXPOSE 8080
+
+## install x11-utils (includes xev) near the end to avoid rebuilding earlier layers
+RUN apt-get --yes -qq update \
+ && apt-get --yes -qq install x11-utils \
+ && apt-get --yes -qq clean \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/vscode
 USER vscode
