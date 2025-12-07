@@ -2,19 +2,12 @@ FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04
 
 RUN apt-get --yes -qq update \
  && apt-get --yes -qq upgrade \
- && apt-get --yes -qq install build-essential gfortran m4 bison flex \
+ && apt-get --yes -qq install build-essential gfortran m4 bison flex pkg-config \
 		      libmotif-dev libxext-dev libxpm-dev libxinerama-dev libjpeg-dev \
-		      python3-setuptools \
- && apt-get --yes -qq clean \
- && rm -rf /var/lib/apt/lists/*
-
-## add xpra repositories
-RUN git clone https://github.com/Xpra-org/xpra && cd xpra \
-    && ./setup.py install-repo
-
-# install xpra
-RUN apt-get --yes -qq update && apt-get --yes -qq upgrade \
- && apt-get --yes -qq install xpra xpra-html5 \
+		      xvfb libx11-dev libxtst-dev libxcomposite-dev libxdamage-dev libxres-dev \
+		      libxkbfile-dev pandoc libsystemd-dev liblz4-dev xauth x11-xkb-utils \
+		      libxxhash-dev xterm \
+		      uglifyjs brotli libjs-jquery libjs-jquery-ui gnome-backgrounds \
  && apt-get --yes -qq clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -51,6 +44,19 @@ RUN apt-get --yes -qq update \
  && rm -rf /var/lib/apt/lists/*
 RUN wget https://fastestcode.org/dl/ximaging-src-1.8.tar.xz && tar xvf ximaging-src-1.8.tar.xz
 RUN cd ximaging-src-1.8 && make Linux && make install
+
+## install xpra from official repository
+RUN apt-get --yes -qq update \
+ && apt-get --yes -qq install apt-transport-https ca-certificates wget \
+ && wget -O "/usr/share/keyrings/xpra.asc" https://xpra.org/xpra.asc \
+ && wget -O "/etc/apt/sources.list.d/xpra.sources" https://raw.githubusercontent.com/Xpra-org/xpra/master/packaging/repos/noble/xpra.sources \
+ && apt-get --yes -qq update \
+ && apt-get --yes -qq install xpra \
+ && apt-get --yes -qq clean \
+ && rm -rf /var/lib/apt/lists/*
+
+## install xpra HTML5 client from source with pinned version
+RUN git clone https://github.com/Xpra-org/xpra-html5 && cd xpra-html5 && git checkout v19 && ./setup.py install
 
 ## copy settings
 COPY .bashrc /home/vscode/.bashrc
