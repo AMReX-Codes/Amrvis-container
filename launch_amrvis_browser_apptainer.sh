@@ -14,6 +14,7 @@ fi
 # NOTE: apptainer forwards all ports by default
 apptainer run --cleanenv \
     --bind "$MOUNT_DIR:/home/vscode/data" \
+    --pwd /home/vscode \
     ${XPRA_DEFAULTS_MOUNT:+--bind "$XPRA_DEFAULTS:/usr/share/xpra/www/default-settings.txt:ro"} \
     docker://ghcr.io/amrex-codes/amrvis-container:main
 
