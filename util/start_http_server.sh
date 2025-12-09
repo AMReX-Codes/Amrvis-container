@@ -3,7 +3,8 @@
 ## Wrapper script to launch browser-based X11 session
 ## (NOTE: This should only be called from within the Docker container.)
 PORT=8080
-EXE=xterm
+# Force xterm to run an interactive bash that sources /home/vscode/.bashrc
+EXE='xterm -e "bash --rcfile /home/vscode/.bashrc -i"'
 export XPRA_PASSWORD=$(openssl rand -hex 16)
 
 echo ""
@@ -16,7 +17,7 @@ echo ""
 echo ""
 
 # use xpra as window manager
-xpra start --start-child=$EXE --bind-tcp=0.0.0.0:$PORT --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
+xpra start --start-child="$EXE" --bind-tcp=0.0.0.0:$PORT --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
 # use emwm as window manager (buggy)
 #xpra desktop --start-child=emwm --bind-tcp=0.0.0.0:$PORT --exit-with-children --no-daemon > xpra_logfile.txt 2>&1
 

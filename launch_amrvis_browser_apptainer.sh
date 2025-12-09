@@ -36,6 +36,7 @@ echo
 # NOTE: apptainer forwards all ports by default
 apptainer run --cleanenv --writable-tmpfs \
     --bind "$MOUNT_DIR:/home/vscode/data" \
+    --bind "$SCRIPT_DIR/util/start_http_server.sh:/home/vscode/start_http_server.sh:ro" \
     --env APPTAINERENV_SHELL=/bin/bash \
     --env APPTAINERENV_BASH_ENV=/home/vscode/.bashrc \
     --pwd /home/vscode \
