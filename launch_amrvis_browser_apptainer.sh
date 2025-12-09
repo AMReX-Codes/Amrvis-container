@@ -36,6 +36,8 @@ echo
 # NOTE: apptainer forwards all ports by default
 apptainer run --cleanenv --writable-tmpfs \
     --bind "$MOUNT_DIR:/home/vscode/data" \
+    --env APPTAINERENV_SHELL=/bin/bash \
+    --env APPTAINERENV_BASH_ENV=/home/vscode/.bashrc \
     --pwd /home/vscode \
     ${XPRA_DEFAULTS_MOUNT:+--bind "$XPRA_DEFAULTS:/usr/share/xpra/www/default-settings.txt:ro"} \
     docker://ghcr.io/amrex-codes/amrvis-container:main
