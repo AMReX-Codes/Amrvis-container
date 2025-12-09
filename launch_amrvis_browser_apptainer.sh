@@ -22,9 +22,9 @@ pull_cmd="apptainer pull $local_sif $default_image"
 if command -v srun >/dev/null 2>&1 && [ -z "$SLURM_JOB_ID" ]; then
   echo "Detected SLURM environment on host $HOSTNAME, but no interactive job is active."
   echo "Please start an interactive job and re-run this script, for example:"
-  echo "  salloc -N 1 -t 01:00:00 --pty bash"
+  echo "  salloc -N 1 -t 01:00:00"
   echo "or"
-  echo "  srun -N 1 -t 01:00:00 --pty bash"
+  echo "  srun -N 1 -t 01:00:00"
   exit 1
 fi
 
