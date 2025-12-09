@@ -11,26 +11,26 @@ RUN apt-get --yes -qq update \
  && apt-get --yes -qq clean \
  && rm -rf /var/lib/apt/lists/*
 
-## build Volpack
-RUN git clone https://ccse.lbl.gov/pub/Downloads/volpack.git && cd volpack && make -j`nproc`
+## build Volpack [temporarily offline due to LBL data center outage -- 9 Dec 2025]
+#RUN git clone https://ccse.lbl.gov/pub/Downloads/volpack.git && cd volpack && make -j`nproc`
 
 ## download AMReX
 RUN git clone https://github.com/AMReX-Codes/amrex.git
 
-## build AmrProfParser
+## build AmrProfParser (patched for xpra)
 RUN git clone https://github.com/BenWibking/Amrvis.git AmrProfParser && cd AmrProfParser && git checkout logspace-colorbar
 COPY GNUmakefile AmrProfParser/GNUmakefile
 RUN cd AmrProfParser && make DIM=2 USE_PROFPARSER=TRUE -j`nproc`
 
-## build Amrvis (2D)
+## build Amrvis (2D) (patched for xpra)
 RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis2D && cd Amrvis2D && git checkout logspace-colorbar
 COPY GNUmakefile Amrvis2D/GNUmakefile
-RUN cd Amrvis2D && make DIM=2 -j`nproc`
+RUN cd Amrvis2D && make DIM=2 USE_VOLRENDER=FALSE -j`nproc`
 
-## build Amrvis (3D)
+## build Amrvis (3D) (patched for xpra)
 RUN git clone https://github.com/BenWibking/Amrvis.git Amrvis3D && cd Amrvis3D && git checkout logspace-colorbar
 COPY GNUmakefile Amrvis3D/GNUmakefile
-RUN cd Amrvis3D && make DIM=3 -j`nproc`
+RUN cd Amrvis3D && make DIM=3 USE_VOLRENDER=FALSE -j`nproc`
 
 ## build X11 file viewer
 RUN wget https://fastestcode.org/dl/xfile-src-1.0-beta.tar.xz && tar xvf xfile-src-1.0-beta.tar.xz
@@ -55,8 +55,8 @@ RUN apt-get --yes -qq update \
  && apt-get --yes -qq clean \
  && rm -rf /var/lib/apt/lists/*
 
-## install xpra HTML5 client from source with pinned version
-RUN git clone https://github.com/BenWibking/xpra-html5 && cd xpra-html5 && git checkout middle-mouse-emu && ./setup.py install
+## install xpra HTML5 client from source with pinned hash
+RUN git clone https://github.com/Xpra-org/xpra-html5 && cd xpra-html5 && git checkout 67cdafe7b9c00311f535a9c2eea88104f2b28cc3 && ./setup.py install
 
 ## copy settings
 COPY .bashrc /home/vscode/.bashrc
