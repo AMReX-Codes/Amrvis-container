@@ -20,6 +20,23 @@ An `xterm` window appears; launch either `amrvis2d` or `amrvis3d` from there:
 
 Additional X11 tools included in the container: `xfile` (file browser), `ximaging` (image viewer), `xpdf`, `xev`, `nedit`, and `xterm`.
 
+### HPC / remote clusters (Apptainer)
+If you have Apptainer on a cluster with SLURM, use the HPC-friendly launcher:
+1. On a login node (once), pull the image into this directory:
+```console
+$ apptainer pull amrvis-container.sif docker://ghcr.io/amrex-codes/amrvis-container:main
+```
+2. Start an interactive job (example) and switch to the compute node:
+```console
+$ salloc -N 1 -t 01:00:00
+```
+3. From the compute node, run the browser launcher and point it at your data:
+```console
+$ ./launch_amrvis_browser_hpc.sh /path/to/data
+```
+   - The script detects SLURM, verifies a local SIF (or `AMRVIS_APPTAINER_IMAGE`), and prints the exact SSH tunnel command to run on your desktop (typically `ssh -L 9999:<compute>:8080 $USER@<login>`).
+4. On your desktop, create the tunnel and open http://localhost:9999. Paste the one-time password from the terminal, then launch `amrvis2d` or `amrvis3d` inside the `xterm`.
+
 ## Legacy native X11 launchers
 If you prefer direct X11 instead of the browser workflow, use the launchers in `legacy_launchers/` (they require a working X11 server on the host).
 
