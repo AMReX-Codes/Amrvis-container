@@ -1,4 +1,5 @@
 # Amrvis-container
+[![Docker](https://github.com/AMReX-Codes/Amrvis-container/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/AMReX-Codes/Amrvis-container/actions/workflows/docker-publish.yml)
 
 ![Screenshot 2025-05-23 at 1 34 06 PM](https://github.com/user-attachments/assets/26c4c8df-4768-4cd7-ade5-15229741c501)
 
