@@ -19,6 +19,15 @@ local_sif="$SCRIPT_DIR/amrvis-container.sif"
 image="${AMRVIS_APPTAINER_IMAGE:-$default_image}"
 pull_cmd="apptainer pull $local_sif $default_image"
 
+if command -v srun >/dev/null 2>&1 && [ -z "$SLURM_JOB_ID" ]; then
+  echo "Detected SLURM environment on host $HOSTNAME, but no interactive job is active."
+  echo "Please start an interactive job and re-run this script, for example:"
+  echo "  salloc -N 1 -t 01:00:00 --pty bash"
+  echo "or"
+  echo "  srun -N 1 -t 01:00:00 --pty bash"
+  exit 1
+fi
+
 if [ -n "$SLURM_JOB_ID" ]; then
   if [ -n "$AMRVIS_APPTAINER_IMAGE" ]; then
     image="$AMRVIS_APPTAINER_IMAGE"
