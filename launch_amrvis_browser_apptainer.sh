@@ -11,6 +11,28 @@ if [ -f "$XPRA_DEFAULTS" ]; then
   XPRA_DEFAULTS_MOUNT="-v $XPRA_DEFAULTS:/usr/share/xpra/www/default-settings.txt:ro"
 fi
 
+port=8080
+submit_host=${SLURM_SUBMIT_HOST:-$HOSTNAME}
+compute_host=${SLURMD_NODENAME:-$HOSTNAME}
+echo
+echo
+echo "Launching Amrvis-container with port $port on $HOSTNAME"
+echo
+echo "Your SSH tunnel command on your desktop should look like the following"
+echo
+if [ -n "$SLURM_JOB_ID" ]; then
+  echo "  ssh -L 9999:${compute_host}:${port} $USER@${submit_host}"
+  echo
+  echo "(Detected SLURM interactive job: job $SLURM_JOB_ID, submit host ${submit_host}, compute host ${compute_host})"
+else
+  echo "  ssh -L 9999:$HOSTNAME:$port $USER@$submit_host"
+fi
+echo
+echo "Then visit http://localhost:9999 on your desktop."
+echo
+echo "To terminate this session press ctrl-C twice."
+echo
+
 # NOTE: apptainer forwards all ports by default
 apptainer run --cleanenv --writable-tmpfs \
     --bind "$MOUNT_DIR:/home/vscode/data" \
