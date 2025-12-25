@@ -11,8 +11,8 @@ RUN apt-get --yes -qq update \
  && apt-get --yes -qq clean \
  && rm -rf /var/lib/apt/lists/*
 
-## build Volpack [temporarily offline due to LBL data center outage -- 9 Dec 2025]
-#RUN git clone https://ccse.lbl.gov/pub/Downloads/volpack.git && cd volpack && make -j`nproc`
+## build Volpack
+RUN git clone https://ccse.lbl.gov/pub/Downloads/volpack.git && cd volpack && make -j`nproc`
 
 ## download AMReX
 RUN git clone https://github.com/AMReX-Codes/amrex.git
