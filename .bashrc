@@ -5,6 +5,7 @@ alias amrprofparser='/AmrProfParser/amrvis2d.gnu.TRACE_PROF.ex'
 echo "*** Welcome to Amrvis-container! ***"
 echo ""
 echo "Type 'amrvis2d' or 'amrvis3d' to start Amrvis."
+echo "Type 'amrvis2d -a /home/vscode/data/plt*' to animate a sequence of 2D plotfiles."
 echo "Type 'amrprofparser' to start AmrProfParser."
 echo "Type 'xfile' to start a GUI file manager."
 echo "Type 'ximaging' to start a GUI image viewer."
